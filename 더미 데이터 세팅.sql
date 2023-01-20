@@ -1,4 +1,4 @@
-insert into weather values ("TW_0062", "2023-01-18 09:58:34", 27.5, 1009, 16, 7.1, 16, 4.6);
+insert into weather values ("TW_0062", "2023-01-18 09:58:34", 27.5, 1009, 16, 7.1, 4.6);
 
 insert into ship values (44012345, "44012345", "고려103호", "견인용예선");
 insert into arrivalport values ("인천항", 37.459896, 126.625601);
