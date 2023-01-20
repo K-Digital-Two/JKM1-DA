@@ -1,3 +1,22 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema ship
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema ship
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `ship` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `ship` ;
+
 -- -----------------------------------------------------
 -- Table `ship`.`arrivalport`
 -- -----------------------------------------------------
@@ -26,9 +45,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `ship`.`schedule`
+-- Table `ship`.`schedules`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ship`.`schedule` (
+CREATE TABLE IF NOT EXISTS `ship`.`schedules` (
   `ship_shipId` INT NOT NULL,
   `arrivalPort_arrivalName` VARCHAR(10) NOT NULL,
   `departure` VARCHAR(10) NULL DEFAULT NULL,
@@ -51,7 +70,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `ship`.`info`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ship`.`info` (
-  `schedule_ship_shipId` INT NOT NULL,
+  `schedules_ship_shipId` INT NOT NULL,
   `insertTime` DATETIME NULL DEFAULT NULL,
   `shipLat` DOUBLE NULL DEFAULT NULL,
   `shipLon` DOUBLE NULL DEFAULT NULL,
@@ -59,26 +78,11 @@ CREATE TABLE IF NOT EXISTS `ship`.`info` (
   `arrivalTime` DATETIME NULL DEFAULT NULL,
   `takeTime` INT NULL DEFAULT NULL,
   `accuracy` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`schedule_ship_shipId`),
-  INDEX `fk_info_schedule1_idx` (`schedule_ship_shipId` ASC) VISIBLE,
+  PRIMARY KEY (`schedules_ship_shipId`),
+  INDEX `fk_info_schedule1_idx` (`schedules_ship_shipId` ASC) VISIBLE,
   CONSTRAINT `fk_info_schedule1`
-    FOREIGN KEY (`schedule_ship_shipId`)
-    REFERENCES `ship`.`schedule` (`ship_shipId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `ship`.`summary`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ship`.`summary` (
-  `mmsi` INT NOT NULL,
-  `shipName` VARCHAR(20) NULL DEFAULT NULL,
-  `destination` VARCHAR(10) NULL DEFAULT NULL,
-  `predTime` INT NULL DEFAULT NULL,
-  `percentage` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`mmsi`))
+    FOREIGN KEY (`schedules_ship_shipId`)
+    REFERENCES `ship`.`schedules` (`ship_shipId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -94,9 +98,13 @@ CREATE TABLE IF NOT EXISTS `ship`.`weather` (
   `pressure` INT NULL DEFAULT NULL,
   `windDirec` INT NULL DEFAULT NULL,
   `windSpeed` DOUBLE NULL DEFAULT NULL,
-  `flowMeter` INT NULL DEFAULT NULL,
-  `flowRate` DOUBLE NULL DEFAULT NULL,
+  `tideLevel` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`obsId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
