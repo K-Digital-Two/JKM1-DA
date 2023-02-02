@@ -63,7 +63,7 @@ def createSchedules():
 	shipId = portmis.loc[:,"mmsi"].to_list()
 	departure = portmis.loc[:,"전출항지"].to_list()
 	arrivalPort = "인천항"
-	departTime = calcArrivalTime(shipId)
+	departTime = calcDepartTime(shipId)
 
 	# 입력할 데이터 리스트 생성
 	list_schedulesData = []
@@ -73,8 +73,8 @@ def createSchedules():
 	
 	return list_schedulesData
 
-# arrivalTime 계산
-def calcArrivalTime(shipId):
+# departTime 계산
+def calcDepartTime(shipId):
 	departTime = []
 	for i in range(0, len(shipId)) :
 		M = str(random.randint(1, 12))
