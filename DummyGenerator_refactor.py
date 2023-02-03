@@ -41,13 +41,15 @@ def selectTable():
 
 	if selNum == 1:
 		sql = 'INSERT INTO schedules (num, ship_shipId, arrivalPort_arrivalName, departure, departTime) VALUES (%s, %s, %s, %s, %s)'
-		list = createSchedules()
+		# list = createSchedules()
+		list = createSchedules2()
 	elif selNum == 2:
 		sql = 'INSERT INTO ship (shipId, shipCode, shipName, shipUse) VALUES (%s, %s, %s, %s)'
 		list = createShip()
 	elif selNum == 3:
 		sql = ''
-		list = createShiplog()
+		# list = createShiplog()
+		list = createShiplog2()
 	elif selNum == 4:
 		sql = 'INSERT INTO weather (obsId, time, temp, pressure, windDirec, windSpeed, obsLat, obsLon, tideLevel) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'
 		list = createWeather()
@@ -72,6 +74,24 @@ def createSchedules():
 		list_schedulesData.append(data)
 	
 	return list_schedulesData
+
+# schedules 테이블에 입력할 데이터 생성
+##230203 수기입력한 10개 선박 더미데이터
+def createSchedules2():
+	#csv 불러오기
+	schedules = pd.read_csv('./ModelingDataset/schedulesDummy_230203.csv', encoding='cp949')
+	# 컬럼 리스트 생성
+	shipId = schedules.loc[:, 'shipId'].to_list()
+	arrivalPort = schedules.loc[:, 'arrivalName'].to_list()
+	departure = schedules.loc[:, 'departure'].to_list()
+	departTime = schedules.loc[:, 'departTime'].to_list()
+
+	# 입력할 데이터 생성
+	list_schedulesData = []
+	for i in range(len(shipId)):
+		data = shipId[i], arrivalPort[i], departure[i], departTime[i]
+		list_schedulesData.append(data)
+	return list
 
 # departTime 계산
 def calcDepartTime(shipId):
@@ -109,8 +129,8 @@ def createShip():
   # 중복 제거
   ship = ship.drop_duplicates(subset='shipId')
   # 컬럼 리스트 생성
-  shipCode = ship.loc[:,'shipCode'].to_list()
   shipId = ship.loc[:,'shipId'].to_list()
+  shipCode = ship.loc[:,'shipCode'].to_list()
   shipName = ship.loc[:,'shipName'].to_list()
   shipUse = ship.loc[:,'shipUse'].to_list()
 
@@ -125,6 +145,33 @@ def createShip():
 # shiplog 테이블에 입력할 데이터 생성
 def createShiplog():
 	pass
+
+# shiplog 테이블에 입력할 데이터 생성
+##230203 수기입력한 10개 선박 더미데이터
+def createShiplog2():
+	# csv 불러오기
+	shiplog = pd.read_csv('./ModelingDataset/shipDummy.csv', encoding = 'cp949')
+	# 컬럼 리스트 생성
+	timeGroup = shiplog.loc[:, 'timeGroup'].to_list()
+	ship_shipId = shiplog.loc[:,'shipId'].to_list()
+	insertTime = shiplog.loc[:,'insertTime'].to_list()
+	shipLat = shiplog.loc[:,'shipLat'].to_list()
+	shipLon = shiplog.loc[:,'shipLon'].to_list()
+	speed = shiplog.loc[:,'speed'].to_list()
+	arrivalTime = shiplog.loc[:,'arrivalTime'].to_list()
+	takeTime = shiplog.loc[:,'takeTime'].to_list()
+	accuracy = shiplog.loc[:,'accuracy'].to_list()
+	status = shiplog.loc[:,'status'].to_list()
+	totalTakeTime = shiplog.loc[:,'totalTakeTime'].to_list()
+
+	# 입력할 데이터 생성
+	list_shiplogData = []
+	for i in range(len(ship_shipId)) :
+		data = timeGroup[i], ship_shipId[i], insertTime[i], shipLat[i], shipLon[i],
+		speed[i], arrivalTime[i], takeTime[i], accuracy[i], status[i], totalTakeTime[i]
+		list_shiplogData.append(data)
+
+	return list_shiplogData
 
 # weather 테이블에 입력할 데이터 생성
 def createWeather():
