@@ -40,18 +40,20 @@ def selectTable():
 	selNum = int(input("Enter the number: "))
 
 	if selNum == 1:
-		sql = 'INSERT INTO schedules (num, ship_shipId, arrivalPort_arrivalName, departure, departTime) VALUES (%s, %s, %s, %s, %s)'
+		sql = 'INSERT INTO schedules (ship_shipId, arrivalPort_arrivalName, departure, departTime) VALUES (%s, %s, %s, %s)'
 		# list = createSchedules()
 		list = createSchedules2()
 	elif selNum == 2:
 		sql = 'INSERT INTO ship (shipId, shipCode, shipName, shipUse) VALUES (%s, %s, %s, %s)'
 		list = createShip()
 	elif selNum == 3:
-		sql = ''
+		sql = 'INSERT INTO shiplog (timeGroup, ship_shipId, insertTime, shipLat, shipLon, speed, arrivalTime, takeTIme, accuracy, status, totalTakeTime) \
+			VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
 		# list = createShiplog()
 		list = createShiplog2()
 	elif selNum == 4:
-		sql = 'INSERT INTO weather (obsId, time, temp, pressure, windDirec, windSpeed, obsLat, obsLon, tideLevel) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'
+		sql = 'INSERT INTO weather (obsId, time, temp, pressure, windDirec, windSpeed, obsLat, obsLon, tideLevel) \
+			VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'
 		list = createWeather()
 
 	return sql, list
@@ -91,7 +93,7 @@ def createSchedules2():
 	for i in range(len(shipId)):
 		data = shipId[i], arrivalPort[i], departure[i], departTime[i]
 		list_schedulesData.append(data)
-	return list
+	return list_schedulesData
 
 # departTime 계산
 def calcDepartTime(shipId):
@@ -150,7 +152,7 @@ def createShiplog():
 ##230203 수기입력한 10개 선박 더미데이터
 def createShiplog2():
 	# csv 불러오기
-	shiplog = pd.read_csv('./ModelingDataset/shipDummy.csv', encoding = 'cp949')
+	shiplog = pd.read_csv('./ModelingDataset/shiplogDummy_230203.csv', encoding = 'cp949')
 	# 컬럼 리스트 생성
 	timeGroup = shiplog.loc[:, 'timeGroup'].to_list()
 	ship_shipId = shiplog.loc[:,'shipId'].to_list()
@@ -166,8 +168,8 @@ def createShiplog2():
 
 	# 입력할 데이터 생성
 	list_shiplogData = []
-	for i in range(len(ship_shipId)) :
-		data = timeGroup[i], ship_shipId[i], insertTime[i], shipLat[i], shipLon[i],
+	for i in range(len(shiplog)) :
+		data = timeGroup[i], ship_shipId[i], insertTime[i], shipLat[i], shipLon[i],\
 		speed[i], arrivalTime[i], takeTime[i], accuracy[i], status[i], totalTakeTime[i]
 		list_shiplogData.append(data)
 
