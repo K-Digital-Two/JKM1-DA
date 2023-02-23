@@ -8,10 +8,13 @@
 
 ### 프로젝트
 -  2023.01.11 ~ 2023.02.09 (일)
-- [Github - FrontEnd](https://github.com/K-Digital-Two/JKM1-FE)
+- [Github - Data](https://github.com/K-Digital-Two/JKM1-DA)
 
 ### Data 기술스텍
-<img src="https://img.shields.io/badge/ Figma-F24E1E?style=flat-square&logo=Figma&logoColor=ffffff" /> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=ffffff"/> <img src="https://img.shields.io/badge/TailwindCss-764ABC?style=flat-square&logo=tailwind&logoColor=ffffff"/>
+<a href = https://github.com/Choi-09/MySQL> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/></a>
+<a href = https://github.com/Choi-09/Python> <img src="https://img.shields.io/badge/Python-3766AB?style=flat&logo=Python&logoColor=white"/></a>
+<a href = https://github.com/Choi-09/Tensorflow> <img src="https://img.shields.io/badge/Tensorflow-FF6F00?style=flat&logo=Tensorflow&logoColor=white"/></a>
+<a href = https://github.com/Choi-09/JupyterNB> <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat&logo=Jupyter&logoColor=white"/></a> 
 
 ### ERD
 <p align = center> <img src = https://user-images.githubusercontent.com/51871037/215451873-ee964b57-a528-4b5b-abd5-b5c300f2a810.png></p>
