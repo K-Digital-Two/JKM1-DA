@@ -21,7 +21,7 @@
 
 ---
 ### ERD
-<p align = center> <img src = https://user-images.githubusercontent.com/51871037/215451873-ee964b57-a528-4b5b-abd5-b5c300f2a810.png></p>
+<p align = center> <img src = https://user-images.githubusercontent.com/51871037/220904641-34ab4642-c890-4fff-93a4-4ab6cb52a742.png></p>
 
 ---
 ### 라이브러리 설치
